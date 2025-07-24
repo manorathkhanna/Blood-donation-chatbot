@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Blood Donation Chatbot</h2>
+    <input id="userInput" placeholder="Ask your question" />
+    <button onclick="send()">Send</button>
+    <p id="response"></p>
+
+    <script>
+      async function send() {
+        const message = document.getElementById("userInput").value;
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+        const data = await res.json();
+        document.getElementById("response").innerText = data.message;
+      }
+    </script>
+  </body>
+</html>
